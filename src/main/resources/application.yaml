@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/demodb
+    url: jdbc:h2:~/project
     username: sa
-    password: 1234
+    password:
 
   h2:
     console:
@@ -17,3 +17,8 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+jwt:
+  secret:
+  access-expiration-ms: 900000
+  refresh-expiration-ms: 604800000
