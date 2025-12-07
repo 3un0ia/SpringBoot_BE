@@ -1,8 +1,8 @@
-package com.aivle._th_miniProject.Book.Repository;
+package com.aivle._th_miniProject.book.repository;
 
-import com.aivle._th_miniProject.Book.Entity.Book;
-import com.aivle._th_miniProject.Book.Entity.Category;
-import com.aivle._th_miniProject.User.Entity.User;
+import com.aivle._th_miniProject.book.entity.Book;
+import com.aivle._th_miniProject.book.entity.Category;
+import com.aivle._th_miniProject.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

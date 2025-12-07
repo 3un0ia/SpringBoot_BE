@@ -1,11 +1,10 @@
-package com.aivle._th_miniProject.Book.Entity;
+package com.aivle._th_miniProject.book.entity;
 
+import com.aivle._th_miniProject.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -43,6 +42,6 @@ public class Book {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    //@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<Comment> comments = new ArrayList<>();
 }

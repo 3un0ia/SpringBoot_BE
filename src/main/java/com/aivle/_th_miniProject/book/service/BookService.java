@@ -1,8 +1,10 @@
-package com.aivle._th_miniProject.Book.Service;
+package com.aivle._th_miniProject.book.service;
 
-import com.aivle._th_miniProject.Book.DTO.*;
-import com.aivle._th_miniProject.Book.Entity.Book;
-import com.aivle._th_miniProject.Book.Repository.BookRepository;
+import com.aivle._th_miniProject.book.dto.*;
+import com.aivle._th_miniProject.book.entity.Book;
+import com.aivle._th_miniProject.book.repository.BookRepository;
+import com.aivle._th_miniProject.user.User;
+import com.aivle._th_miniProject.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -70,7 +72,7 @@ public class BookService {
                 );
 
         // 권한 체크
-        boolean isOwner = book.getUser().getUserId().equals(userId);
+        boolean isOwner = book.getUser().getId().equals(userId);
         boolean isAdmin = role.equals("ADMIN");
 
         if (!isOwner && !isAdmin) {
@@ -102,7 +104,7 @@ public class BookService {
                         new IllegalArgumentException("도서 정보를 가져올 수 없습니다.")
                 );
 
-        boolean isOwner = book.getUser().getUserId().equals(userId);
+        boolean isOwner = book.getUser().getId().equals(userId);
         boolean isAdmin = role.equals("ADMIN");
 
         if (!isOwner && !isAdmin) {
@@ -120,7 +122,7 @@ public class BookService {
                         new IllegalArgumentException("도서 정보를 가져올 수 없습니다.")
                 );
 
-        boolean isOwner = book.getUser().getUserId().equals(userId);
+        boolean isOwner = book.getUser().getId().equals(userId);
         boolean isAdmin = role.equals("ADMIN");
 
         if (!isOwner && !isAdmin) {

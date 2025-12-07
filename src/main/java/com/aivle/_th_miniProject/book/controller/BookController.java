@@ -1,9 +1,14 @@
-package com.aivle._th_miniProject.Book.Controller;
+package com.aivle._th_miniProject.book.controller;
 
-import com.aivle._th_miniProject.Book.DTO.*;
-import com.aivle._th_miniProject.Book.Service.BookService;
+import com.aivle._th_miniProject.book.dto.*;
+import com.aivle._th_miniProject.book.service.BookService;
+import com.aivle._th_miniProject.user.User;
+import com.aivle._th_miniProject.user.UserRepository;
+import com.aivle._th_miniProject.user.jwt.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +21,27 @@ import java.util.Map;
 public class BookController {
 
     private final BookService bookService;
+    private final UserRepository userRepository;
+
+    private Long getLoginUserId() {
+        String email = SecurityUtil.getLoginEmail();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+        return user.getId();
+    }
+
+    private String getLoginUserRole() {
+        String email = SecurityUtil.getLoginEmail();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+        return user.getRole().name();
+    }
 
     @PostMapping
     public ResponseEntity<?> createBook(
-            @Validated @RequestBody BookCreateRequest request,
-            @AuthenticationPrincipal AuthUser authUser
+            @Validated @RequestBody BookCreateRequest request
     ){
-        Long userId = authUser.getUserId();
+        Long userId = getLoginUserId();
 
         try {
             BookCreateResponse response = bookService.createBook(request, userId);
@@ -42,8 +61,7 @@ public class BookController {
 
     @GetMapping("/{bookId}")
     public ResponseEntity<?> getBookDetail(
-            @PathVariable Long bookId,
-            @AuthenticationPrincipal AuthUser authUser
+            @PathVariable Long bookId
     ) {
         try {
             BookDetailResponse response = bookService.getBookDetail(bookId);
@@ -62,11 +80,10 @@ public class BookController {
     @PutMapping("/{bookId}")
     public ResponseEntity<?> updateBook(
             @PathVariable Long bookId,
-            @Validated @RequestBody BookUpdateRequest request,
-            @AuthenticationPrincipal AuthUser authUser
+            @Validated @RequestBody BookUpdateRequest request
     ) {
-        Long userId = authUser.getUserId();
-        String role = authUser.getRole();
+        Long userId = getLoginUserId();
+        String role = getLoginUserRole();
 
         try {
             BookDetailResponse response = bookService.updateBook(bookId, request, userId, role);
@@ -83,11 +100,10 @@ public class BookController {
 
     @DeleteMapping("/{bookId}")
     public ResponseEntity<?> deleteBook(
-            @PathVariable Long bookId,
-            @AuthenticationPrincipal AuthUser authUser
+            @PathVariable Long bookId
     ) {
-        Long userId = authUser.getUserId();
-        String role = authUser.getRole();
+        Long userId = getLoginUserId();
+        String role = getLoginUserRole();
 
         try {
             bookService.deleteBook(bookId, userId, role);
@@ -105,11 +121,10 @@ public class BookController {
     @PatchMapping("/{bookId}")
     public ResponseEntity<?> updateCover(
             @PathVariable Long bookId,
-            @Validated @RequestBody CoverUpdateRequest request,
-            @AuthenticationPrincipal AuthUser authUser
+            @Validated @RequestBody CoverUpdateRequest request
     ) {
-        Long userId = authUser.getUserId();
-        String role = authUser.getRole();
+        Long userId = getLoginUserId();
+        String role = getLoginUserRole();
 
         try {
             CoverUpdateResponse response =

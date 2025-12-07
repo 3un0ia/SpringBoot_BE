@@ -1,13 +1,14 @@
-package com.aivle._th_miniProject.Book.DTO;
+package com.aivle._th_miniProject.book.dto;
 
-import com.aivle._th_miniProject.Book.Entity.Category;
+import com.aivle._th_miniProject.book.entity.Category;
 import lombok.Builder;
 import lombok.Getter;
+
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class BookCreateResponse {
+public class BookDetailResponse {
 
     private Long bookId;
     private String title;
@@ -16,5 +17,5 @@ public class BookCreateResponse {
     private String coverImage;
     private Category category;
     private LocalDateTime createdAt;
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 }

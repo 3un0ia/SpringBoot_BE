@@ -1,4 +1,4 @@
-package com.aivle._th_miniProject.Book.DTO;
+package com.aivle._th_miniProject.book.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.aivle._th_miniProject.Book.DTO;
+package com.aivle._th_miniProject.book.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
