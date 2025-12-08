@@ -1,16 +1,21 @@
 package com.aivle._th_miniProject.user;
 
+import com.aivle._th_miniProject.book.dto.BookDetailResponse;
+import com.aivle._th_miniProject.book.service.BookService;
 import com.aivle._th_miniProject.user.dtos.*;
 import com.aivle._th_miniProject.user.jwt.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final BookService bookService;
 
     @PostMapping("/user/signup")
     public ResponseEntity<User> signup(@RequestBody SignupRequest request) {
@@ -38,8 +43,9 @@ public class UserController {
     }
 
     @GetMapping("/user/book/{userId}")
-    public void getBooks(@RequestParam("userId")Long id) {
-
+    public ResponseEntity<List<BookDetailResponse>> getBooks(@PathVariable Long userId) {
+        List<BookDetailResponse> books = bookService.getBooksByUser(userId);
+        return ResponseEntity.ok(books);
     }
 
 }

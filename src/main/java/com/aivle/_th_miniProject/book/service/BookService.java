@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -137,6 +138,16 @@ public class BookService {
                 book.getCoverImage(),
                 book.getUpdatedAt()
         );
+    }
+
+    public List<BookDetailResponse> getBooksByUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다."));
+        List<Book> books = bookRepository.findByUser(user);
+
+        return books.stream()
+                .map(BookDetailResponse::from)
+                .toList();
     }
 
 }
