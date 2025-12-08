@@ -5,6 +5,7 @@ import com.aivle._th_miniProject.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,17 @@ public class Book {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "cover_image")
+    private String coverImage;
+
     @Column
     private String author;
 
-    @Column(name = "cover_image")
-    private String coverImage;
+    @Column(nullable = false)
+    private Integer stock = 0;
+
+    @Column(precision = 12, scale = 2)
+    private BigDecimal price = BigDecimal.valueOf(0);
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

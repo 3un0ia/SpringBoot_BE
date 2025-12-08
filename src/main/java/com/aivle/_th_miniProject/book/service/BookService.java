@@ -30,6 +30,8 @@ public class BookService {
                 .description(request.getDescription())
                 .coverImage(request.getCoverImage())
                 .category(request.getCategory())
+                .stock(request.getStock())
+                .price(request.getPrice())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
@@ -43,6 +45,8 @@ public class BookService {
                 .description(saved.getDescription())
                 .coverImage(saved.getCoverImage())
                 .category(saved.getCategory())
+                .stock(saved.getStock())
+                .price(saved.getPrice())
                 .createdAt(saved.getCreatedAt())
                 .updatedAt(saved.getUpdatedAt())
                 .build();
@@ -61,6 +65,8 @@ public class BookService {
                 .description(book.getDescription())
                 .coverImage(book.getCoverImage())
                 .category(book.getCategory())
+                .stock(book.getStock())
+                .price(book.getPrice())
                 .createdAt(book.getCreatedAt())
                 .updatedAt(book.getUpdatedAt())
                 .build();
@@ -85,6 +91,8 @@ public class BookService {
         book.setDescription(request.getDescription());
         book.setCoverImage(request.getCoverImage());
         book.setCategory(request.getCategory());
+        book.setStock(request.getStock());
+        book.setPrice(request.getPrice());
         book.setUpdatedAt(LocalDateTime.now());
 
         return BookDetailResponse.builder()
@@ -94,6 +102,8 @@ public class BookService {
                 .description(book.getDescription())
                 .coverImage(book.getCoverImage())
                 .category(book.getCategory())
+                .stock(book.getStock())
+                .price(book.getPrice())
                 .createdAt(book.getCreatedAt())
                 .updatedAt(book.getUpdatedAt())
                 .build();

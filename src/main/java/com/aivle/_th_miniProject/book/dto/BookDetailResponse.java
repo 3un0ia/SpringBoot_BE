@@ -5,6 +5,7 @@ import com.aivle._th_miniProject.book.entity.Category;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,6 +20,8 @@ public class BookDetailResponse {
     private Category category;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Integer stock;
+    private BigDecimal price;
 
     public static BookDetailResponse from(Book book) {
         return BookDetailResponse.builder()
@@ -28,6 +31,8 @@ public class BookDetailResponse {
                 .description(book.getDescription())
                 .coverImage(book.getCoverImage())
                 .category(book.getCategory())
+                .stock(book.getStock())
+                .price(book.getPrice())
                 .createdAt(book.getCreatedAt())
                 .updatedAt(book.getUpdatedAt())
                 .build();

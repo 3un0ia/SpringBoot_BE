@@ -3,6 +3,8 @@ package com.aivle._th_miniProject.book.dto;
 import com.aivle._th_miniProject.book.entity.Category;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,4 +19,6 @@ public class BookCreateResponse {
     private Category category;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Integer stock;
+    private BigDecimal price;
 }

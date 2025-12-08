@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Getter
 @NoArgsConstructor
 public class BookUpdateRequest {
@@ -20,4 +22,10 @@ public class BookUpdateRequest {
 
     @NotNull(message = "카테고리는 필수 입력입니다.")
     private Category category;
+
+    @NotNull(message = "재고는 필수 입력입니다.")
+    private Integer stock;
+
+    @NotNull(message = "가격은 필수 입력입니다.")
+    private BigDecimal price;
 }
