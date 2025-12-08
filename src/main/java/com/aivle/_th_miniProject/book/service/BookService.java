@@ -52,11 +52,14 @@ public class BookService {
                 .build();
     }
 
+    @Transactional
     public BookDetailResponse getBookDetail(Long bookId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() ->
                         new IllegalArgumentException("도서 정보를 가져올 수 없습니다.")
                 );
+
+        book.setViewCount(book.getViewCount() + 1);
 
         return BookDetailResponse.builder()
                 .bookId(book.getBookId())
