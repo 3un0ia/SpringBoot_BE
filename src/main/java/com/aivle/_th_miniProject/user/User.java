@@ -1,9 +1,13 @@
 package com.aivle._th_miniProject.user;
 
+import com.aivle._th_miniProject.book.entity.Book;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Entity @Getter
@@ -27,9 +31,9 @@ public class User {
 
     private String refreshToken;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    @JsonManagedReference
-//    private List<Book> books;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private List<Book> books;
 
     public enum Role {
         ADMIN, NORMAL

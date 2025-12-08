@@ -19,6 +19,6 @@ spring:
         format_sql: true
 
 jwt:
-  secret:
+  secret: ${JWT_SECRET}
   access-expiration-ms: 900000
   refresh-expiration-ms: 604800000
