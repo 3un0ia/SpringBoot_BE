@@ -59,6 +59,19 @@ public class BookController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<?> getEntireBooks()
+    {
+        try {
+            EntireBookResponse response = bookService.getAllBooks();
+            return ResponseEntity.ok(response);
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400)
+                    .body(Map.of("errorMessage", e.getMessage()));
+        }
+    }
+
     @GetMapping("/{bookId}")
     public ResponseEntity<?> getBookDetail(
             @PathVariable Long bookId

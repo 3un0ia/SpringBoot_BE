@@ -38,18 +38,7 @@ public class BookService {
 
         Book saved = bookRepository.save(book);
 
-        return BookCreateResponse.builder()
-                .bookId(saved.getBookId())
-                .title(saved.getTitle())
-                .author(saved.getAuthor())
-                .description(saved.getDescription())
-                .coverImage(saved.getCoverImage())
-                .category(saved.getCategory())
-                .stock(saved.getStock())
-                .price(saved.getPrice())
-                .createdAt(saved.getCreatedAt())
-                .updatedAt(saved.getUpdatedAt())
-                .build();
+        return BookCreateResponse.from(saved);
     }
 
     @Transactional
@@ -61,18 +50,12 @@ public class BookService {
 
         book.setViewCount(book.getViewCount() + 1);
 
-        return BookDetailResponse.builder()
-                .bookId(book.getBookId())
-                .title(book.getTitle())
-                .author(book.getAuthor())
-                .description(book.getDescription())
-                .coverImage(book.getCoverImage())
-                .category(book.getCategory())
-                .stock(book.getStock())
-                .price(book.getPrice())
-                .createdAt(book.getCreatedAt())
-                .updatedAt(book.getUpdatedAt())
-                .build();
+        return BookDetailResponse.from(book);
+    }
+
+    public EntireBookResponse getAllBooks() {
+        List<Book> books = bookRepository.findAllByOrderByUpdatedAtDesc();
+        return EntireBookResponse.from(books);
     }
 
     @Transactional
@@ -98,18 +81,7 @@ public class BookService {
         book.setPrice(request.getPrice());
         book.setUpdatedAt(LocalDateTime.now());
 
-        return BookDetailResponse.builder()
-                .bookId(book.getBookId())
-                .title(book.getTitle())
-                .author(book.getUser().getName())
-                .description(book.getDescription())
-                .coverImage(book.getCoverImage())
-                .category(book.getCategory())
-                .stock(book.getStock())
-                .price(book.getPrice())
-                .createdAt(book.getCreatedAt())
-                .updatedAt(book.getUpdatedAt())
-                .build();
+        return BookDetailResponse.from(book);
     }
 
     @Transactional
