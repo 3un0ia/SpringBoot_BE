@@ -75,6 +75,21 @@ com.aivle._th_miniProject
 │  └─service
 │         OrderService.java
 │
+├─cartItem
+│  ├─controller
+│  │      CartController.java
+│  ├─dto
+│  │      UpdateQuantityRequest.java
+│  │      CartItemAddRequest.java
+│  │      CartItemResponse.java
+│  │      CartAllResponse.java
+│  ├─entity
+│  │      CartItem.java
+│  ├─repository
+│  │      CartItemRepository.java
+│  └─service
+│         CartService.java
+│
 ├─user
 │  ├─User.java
 │  ├─UserController.java
@@ -169,7 +184,7 @@ com.aivle._th_miniProject
 
 <br>
 
-## 🛒 ORDER 도메인
+## 📲 ORDER 도메인
 
 ### 📌 주요 기능
 
@@ -189,6 +204,34 @@ com.aivle._th_miniProject
 * Repository: `OrderRepository`, `OrderItemRepository`
 * Entity: `Order`, `OrderItem`
 * DTO: `OrderCreateRequest`, `OrderResponse`
+
+<br>
+
+---
+
+<br>
+
+## 🛒 CART 도메인
+
+### 📌 주요 기능
+
+| 기능        | Method | Endpoint                   | 설명               |
+| --------- | ------ | -------------------------- | ---------------- |
+| 장바구니 담기  | POST   | `/cart`        | 다중 Book 장바구니에 포함 |
+| 장바구니 조회  | GET    | `/cart`        | 장바구니 상세 정보 조회   |
+| 장바구니 수량 변경  | PATCH  | `/cart/{cartItemId}` | 장바구니 Item 수량 지정 |
+| 장바구니 항목 삭제  | DELETE  | `/cart/{cartItemId}` | 장바구니 내 단일 Item 삭제 |
+| 장바구니 전체 삭제  | DELETE    | `/cart`        | 장바구니 Item 전체 삭제  |
+
+
+### 📂 구성 클래스
+
+* Controller: `CartController`
+* Service: `CartService`
+* Repository: `CartItemRepository`
+* Entity: `CartItem`
+* DTO: `UpdateQuantityRequest`, `CartItemAddRequest`, `CartItemResponse`, ...
+
 
 <br>
 
