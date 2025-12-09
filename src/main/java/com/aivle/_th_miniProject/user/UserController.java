@@ -2,6 +2,7 @@ package com.aivle._th_miniProject.user;
 
 import com.aivle._th_miniProject.book.dto.BookDetailResponse;
 import com.aivle._th_miniProject.book.service.BookService;
+import com.aivle._th_miniProject.order.service.OrderService;
 import com.aivle._th_miniProject.user.dtos.*;
 import com.aivle._th_miniProject.user.jwt.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
     private final BookService bookService;
+    private final OrderService orderService;
 
     @PostMapping("/user/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
@@ -76,6 +78,17 @@ public class UserController {
             return ResponseEntity.status(401).body(Map.of("errorMessage", e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(403).body(Map.of("errorMessage", e.getMessage()));
+        }
+    }
+
+    @GetMapping("/user/order/{userId}")
+    public ResponseEntity<?> getOrders(@PathVariable Long userId) {
+        try {
+            orderService.getOrdersByUser(userId);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400).body(Map.of("errorMessage", e.getMessage()));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(Map.of("errorMessage", e.getMessage()));
         }
     }
 
