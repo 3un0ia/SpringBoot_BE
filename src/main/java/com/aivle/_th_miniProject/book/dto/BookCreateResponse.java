@@ -1,5 +1,6 @@
 package com.aivle._th_miniProject.book.dto;
 
+import com.aivle._th_miniProject.book.entity.Book;
 import com.aivle._th_miniProject.book.entity.Category;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,4 +22,20 @@ public class BookCreateResponse {
     private LocalDateTime updatedAt;
     private Integer stock;
     private BigDecimal price;
+
+    public static BookCreateResponse from(Book book) {
+        return BookCreateResponse.builder()
+                .bookId(book.getBookId())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .description(book.getDescription())
+                .coverImage(book.getCoverImage())
+                .category(book.getCategory())
+                .stock(book.getStock())
+                .price(book.getPrice())
+                .createdAt(book.getCreatedAt())
+                .updatedAt(book.getUpdatedAt())
+                .build();
+    }
+
 }

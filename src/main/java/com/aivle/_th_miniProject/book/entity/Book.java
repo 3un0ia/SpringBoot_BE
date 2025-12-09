@@ -55,10 +55,10 @@ public class Book {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
-    private Long viewCount;
-
     @Builder.Default
+    @Column(nullable = false)
+    private Long viewCount = 0L;
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 }
