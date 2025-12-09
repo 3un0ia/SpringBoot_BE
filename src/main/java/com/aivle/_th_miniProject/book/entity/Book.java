@@ -33,7 +33,7 @@ public class Book {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "cover_image")
+    @Column(name = "cover_image", length = 10000)
     private String coverImage;
 
     @Column
