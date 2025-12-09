@@ -49,5 +49,6 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+    public void setUpdatedAt(LocalDateTime time) { this.updatedAt = time; }
     public void setTotalAmount(Integer val) { this.totalAmount = val; }
 }

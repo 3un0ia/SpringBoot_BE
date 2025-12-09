@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 public class OrderResponse {
     private Long orderId;
     private Long userId;
-    private int totalAmount;
-    private int totalPrice;
+    private Integer totalAmount;
     private String status;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private List<OrderItemResponse> items;
 
     @Getter
@@ -23,9 +23,8 @@ public class OrderResponse {
     public static class OrderItemResponse {
         private Long bookId;
         private String title;
-        private int quantity;
-        private int price;
-        private int subTotal;
+        private Integer quantity;
+        private Integer price;
     }
 
     public static OrderResponse from(Order order) {
@@ -35,13 +34,13 @@ public class OrderResponse {
                 .totalAmount(order.getTotalAmount())
                 .status(order.getStatus().name())
                 .createdAt(order.getCreatedAt())
+                .updatedAt(order.getUpdatedAt())
                 .items(order.getItems().stream()
                         .map(i -> OrderItemResponse.builder()
                                 .bookId(i.getBook().getBookId())
                                 .title(i.getBook().getTitle())
                                 .quantity(i.getQuantity())
                                 .price(i.getPrice())
-                                .subTotal(i.getSubtotal())
                                 .build()
                         ).toList())
                 .build();

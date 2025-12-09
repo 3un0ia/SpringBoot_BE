@@ -2,6 +2,7 @@ package com.aivle._th_miniProject.user;
 
 import com.aivle._th_miniProject.book.dto.BookDetailResponse;
 import com.aivle._th_miniProject.book.service.BookService;
+import com.aivle._th_miniProject.order.dto.OrderResponse;
 import com.aivle._th_miniProject.order.service.OrderService;
 import com.aivle._th_miniProject.user.dtos.*;
 import com.aivle._th_miniProject.user.jwt.SecurityUtil;
@@ -84,11 +85,14 @@ public class UserController {
     @GetMapping("/user/order/{userId}")
     public ResponseEntity<?> getOrders(@PathVariable Long userId) {
         try {
-            orderService.getOrdersByUser(userId);
+            List<OrderResponse> response = orderService.getOrdersByUser(userId);
+            return ResponseEntity.ok().body(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(400).body(Map.of("errorMessage", e.getMessage()));
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(Map.of("errorMessage", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(Map.of("errorMessage", e.getMessage()));
         }
     }
 
