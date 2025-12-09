@@ -136,4 +136,18 @@ public class BookService {
                 .toList();
     }
 
+    @Transactional
+    public StockUpdateResponse updateStock(Long bookId, StockUpdateRequest request) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("도서를 찾을 수 없습니다."));
+        if(request.getStock() < 0) {
+            throw new IllegalArgumentException("재고는 음수일 수 없습니다.");
+        }
+        book.setStock(request.getStock());
+        bookRepository.save(book);
+        return new StockUpdateResponse(
+                book.getBookId(),
+                book.getTitle(),
+                book.getStock());
+    }
 }

@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/refresh").permitAll()
                         .requestMatchers("/user/signup").permitAll()
                         .requestMatchers("/user/login").permitAll()
+                        .requestMatchers("/book/*/stock").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 );
 

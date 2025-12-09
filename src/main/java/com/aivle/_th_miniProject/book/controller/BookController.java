@@ -1,6 +1,7 @@
 package com.aivle._th_miniProject.book.controller;
 
 import com.aivle._th_miniProject.book.dto.*;
+import com.aivle._th_miniProject.book.entity.Book;
 import com.aivle._th_miniProject.book.service.BookService;
 import com.aivle._th_miniProject.user.User;
 import com.aivle._th_miniProject.user.UserRepository;
@@ -157,6 +158,30 @@ public class BookController {
                         .body(Map.of("errorMessage", e.getMessage()));
             }
             return ResponseEntity.status(400)
+                    .body(Map.of("errorMessage", e.getMessage()));
+        }
+    }
+
+    @PutMapping("/{bookId}/stock")
+    public ResponseEntity<?> updateStock(
+            @PathVariable Long bookId,
+            @Validated @RequestBody StockUpdateRequest request) {
+        System.out.println("bookId = " + bookId);
+        System.out.println("request = " + request);
+        try {
+            StockUpdateResponse response = bookService.updateStock(bookId, request);
+            return ResponseEntity.ok().body(response);
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.status(400)
+                    .body(Map.of("errorMessage", e.getMessage()));
+        }
+        catch (RuntimeException e) {
+            return ResponseEntity.status(404)
+                    .body(Map.of("errorMessage", e.getMessage()));
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(403)
                     .body(Map.of("errorMessage", e.getMessage()));
         }
     }
