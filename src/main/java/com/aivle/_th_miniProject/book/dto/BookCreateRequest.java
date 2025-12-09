@@ -29,5 +29,5 @@ public class BookCreateRequest {
     private Integer stock;
 
     @NotNull(message = "가격은 필수 입력입니다.")
-    private BigDecimal price;
+    private Integer price;
 }

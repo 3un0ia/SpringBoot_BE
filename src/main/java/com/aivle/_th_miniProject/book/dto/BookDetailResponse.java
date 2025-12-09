@@ -21,7 +21,7 @@ public class BookDetailResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Integer stock;
-    private BigDecimal price;
+    private Integer price;
 
     public static BookDetailResponse from(Book book) {
         return BookDetailResponse.builder()

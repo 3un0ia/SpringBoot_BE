@@ -20,5 +20,5 @@ public class BookCreateResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Integer stock;
-    private BigDecimal price;
+    private Integer price;
 }

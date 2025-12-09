@@ -28,10 +28,11 @@ public class Order {
     private OrderStatus status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<OrderItem> items = new ArrayList<>();
 
-    @Column(name = "total_amount", precision = 14, scale = 2, nullable = false)
-    private BigDecimal totalAmount; // 총 가격
+    @Column(name = "total_amount", nullable = false)
+    private Integer totalAmount; // 총 가격
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -48,4 +49,5 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+    public void setTotalAmount(Integer val) { this.totalAmount = val; }
 }

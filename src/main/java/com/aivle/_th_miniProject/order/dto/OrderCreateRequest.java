@@ -14,6 +14,6 @@ public class OrderCreateRequest {
     @Getter
     public static class OrderItemRequest {
         private Long bookId;
-        private int quantity;
+        private Integer quantity;
     }
 }

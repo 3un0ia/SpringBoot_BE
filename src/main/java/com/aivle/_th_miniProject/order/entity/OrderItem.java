@@ -26,11 +26,8 @@ public class OrderItem {
     private Book book;
 
     @Column(nullable = false)
-    private int quantity;
+    private Integer quantity;
 
     @Column(nullable = false)
-    private int price;
-
-    @Column(nullable = false)
-    private int subtotal;
+    private Integer price;
 }

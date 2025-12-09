@@ -42,8 +42,8 @@ public class Book {
     @Column(nullable = false)
     private Integer stock;
 
-    @Column(precision = 12, scale = 2)
-    private BigDecimal price;
+    @Column(nullable = false)
+    private Integer price;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -55,8 +55,9 @@ public class Book {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Builder.Default
     @Column(nullable = false)
-    private Long viewCount;
+    private Long viewCount = 0L;
 
     @Builder.Default
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
