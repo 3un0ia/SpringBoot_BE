@@ -44,9 +44,15 @@ phases:
 
   post_build:
     commands:
+      - echo "▶ Who am I?"
+      - aws sts get-caller-identity
+
       - echo "▶ Update kubeconfig"
       - aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER_NAME
 
+      - echo "▶ Test access"
+      - kubectl auth can-i get pods -A
+      -
       - echo "▶ Deploy to EKS"
       - kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=$IMAGE_URI
       - kubectl rollout status deployment/$DEPLOYMENT_NAME
