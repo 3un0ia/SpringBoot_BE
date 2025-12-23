@@ -13,7 +13,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:3000",
                         "http://localhost:3001",
-                        "https://d1lls7951s2z5l.cloudfront.net"
+                        "https://d1lls7951s2z5l.cloudfront.net",
+                        "http://aivle-class1-group1-bucket.s3-website-us-east-1.amazonaws.com"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedHeaders("*")
